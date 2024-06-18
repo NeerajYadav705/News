@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Header from './components/Header';
+import ArticleList from './components/ArticleList';
 
-function App() {
+const App = () => {
+  const [articles, setArticles] = useState([]);
+  const [category, setCategory] = useState('general');
+  const [page, setPage] = useState(1);
+
+  const fetchArticles = async (category, page) => {
+    const response = await axios.get(
+      `https://newsapi.org/v2/top-headlines?category=${category}&page=${page}&apiKey=c98070fb5b7949f982d5e3b9ed070f37`
+    );
+    setArticles(response.data.articles);
+  };
+
+  useEffect(() => {
+    fetchArticles(category, page);
+  }, [category, page]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-gray-100">
+      <Header setCategory={setCategory} />
+      <ArticleList articles={articles} setPage={setPage} />
     </div>
   );
-}
+};
 
 export default App;
