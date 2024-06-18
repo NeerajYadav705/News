@@ -1,13 +1,15 @@
 import React from 'react';
 
 const categories = [
-  'general',
-  'business',
-  'entertainment',
+  'home',
+  'world',
+  'politics',
+  'technology',
   'health',
   'science',
   'sports',
-  'technology',
+  'arts',
+  'fashion',
 ];
 
 const Header = ({ setCategory }) => {

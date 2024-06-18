@@ -5,14 +5,14 @@ import ArticleList from './components/ArticleList';
 
 const App = () => {
   const [articles, setArticles] = useState([]);
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState('home');
   const [page, setPage] = useState(1);
 
   const fetchArticles = async (category, page) => {
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?category=${category}&page=${page}&apiKey=c98070fb5b7949f982d5e3b9ed070f37`
+      `https://api.nytimes.com/svc/topstories/v2/${category}.json?api-key=qvArGVe6E0DikFb1aGkhZPOXPl5AUh4G`
     );
-    setArticles(response.data.articles);
+    setArticles(response.data.results);
   };
 
   useEffect(() => {
